@@ -27,7 +27,7 @@ public class PlaceImage extends BaseEntity {
 	@Column(name = "seq")
 	private int seq;
 
-	@Column(name = "url")
+	@Column(name = "url", length=1000)
 	private String url;
 
 	// Place와 양방향 연결

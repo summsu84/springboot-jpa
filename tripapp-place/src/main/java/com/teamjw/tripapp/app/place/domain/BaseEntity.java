@@ -45,19 +45,19 @@ public class BaseEntity implements Serializable {
     @CreationTimestamp
     private LocalDateTime createdTime;
 
-    @Column(name = "create_user_name")
+    @Column(name = "create_user_name", length = 100)
     private String createUserName;
 
     @UpdateTimestamp
     private LocalDateTime updatedTime;
 
-    @Column(name = "update_user_name")
+    @Column(name = "update_user_name", length = 100)
     private String updateUserName;
 
-    @Column(name = "use_yn")
+    @Column(name = "use_yn", length = 1)
     private String useYn;
 
-    @Column(name = "del_yn")
+    @Column(name = "del_yn", length = 1)
     private String delYn;
 
 

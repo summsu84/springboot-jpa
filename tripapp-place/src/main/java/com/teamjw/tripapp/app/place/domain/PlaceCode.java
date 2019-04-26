@@ -29,13 +29,13 @@ import javax.validation.constraints.NotEmpty;
 public class PlaceCode extends BaseDateEntity {
 
 	@Id
-	@Column(name = "place_code")
+	@Column(name = "place_code", length=8, unique=true, nullable = false)
 	@NotEmpty
 	private String placeCode;
 
-	@Column(name = "place_code_korean_name")
+	@Column(name = "place_code_korean_name", length = 100)
 	private String placeCodeKoreanName;
 
-	@Column(name = "place_code_english_name")
+	@Column(name = "place_code_english_name", length = 100)
 	private String placeCodeEnglishName;
 }

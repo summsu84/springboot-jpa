@@ -21,8 +21,6 @@ public class PlaceController {
 	@Value("#{environment['SERVICE_ENDPOINT'] ?: 'localhost:8080'}")
 	private String serviceEndpoint;
 
-	@Inject
-	private PlaceRepository placeRepository;
 
 	@Autowired
     private PlaceService placeService;

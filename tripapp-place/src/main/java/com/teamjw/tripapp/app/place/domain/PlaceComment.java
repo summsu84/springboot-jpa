@@ -23,19 +23,20 @@ import javax.persistence.*;
 public class PlaceComment extends BaseEntity {
 
 	@Column(name = "upper_id")
-	private int upperId;
+	private Long upperId;
 
-	@Column(name = "message")
+	@Column(name = "message", length=500)
 	private String message;
 
 	@Column(name = "recommend")
 	private int recommend;
 
-	@Column(name = "like")
-	private int like;
+	//like 사용 시 오류로 인해 good으로 변경
+	@Column(name = "good")
+	private int good;
 
-	@Column(name = "dislike")
-	private int dislike;
+	@Column(name = "bad")
+	private int bad;
 
 	// Place와 양방향 연결, 해당 엔티티의 place_id와 place와 연결 시킨다.
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -43,11 +44,11 @@ public class PlaceComment extends BaseEntity {
 	private Place place;
 
 
-	public int getUpperId() {
+	public Long getUpperId() {
 		return upperId;
 	}
 
-	public void setUpperId(int upperId) {
+	public void setUpperId(Long upperId) {
 		this.upperId = upperId;
 	}
 
@@ -67,20 +68,20 @@ public class PlaceComment extends BaseEntity {
 		this.recommend = recommend;
 	}
 
-	public int getLike() {
-		return like;
+	public int getGood() {
+		return good;
 	}
 
-	public void setLike(int like) {
-		this.like = like;
+	public void setGood(int good) {
+		this.good = good;
 	}
 
-	public int getDislike() {
-		return dislike;
+	public int getBad() {
+		return bad;
 	}
 
-	public void setDislike(int dislike) {
-		this.dislike = dislike;
+	public void setBad(int bad) {
+		this.bad = bad;
 	}
 
 	@JsonIgnore

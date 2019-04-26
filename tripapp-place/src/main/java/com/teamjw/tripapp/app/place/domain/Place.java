@@ -27,42 +27,42 @@ import java.util.*;
 @ToString
 public class Place extends BaseEntity {
 
-	@Column(name = "place_cd")
+	@Column(name = "place_cd", length=8, unique=true, nullable = false)
 	@NotEmpty
 	private String placeCd;
 
-	@Column(name = "place_theme")
+	@Column(name = "place_theme", length=8, unique=true, nullable = false)
 	private String placeTheme;
 
-	@Column(name = "place_type")
+	@Column(name = "place_type", length=8, unique=true, nullable = false)
 	private String placeType;
 
-	@Column(name = "place_korean_name")
+	@Column(name = "place_korean_name", length = 255, nullable = false)
 	@NotEmpty
 	private String placeKoreanName;
 
-	@Column(name = "place_english_name")
+	@Column(name = "place_english_name", length=255)
 	private String placeEnglishName;
 
-	@Column(name = "place_korean_description")
+	@Column(name = "place_korean_description", length = 1000)
 	private String placeKoreanDescription;
 
-	@Column(name = "place_english_description")
+	@Column(name = "place_english_description", length = 1000)
 	private String placeEnglishDescription;
 
-	@Column(name = "place_address")
+	@Column(name = "place_address", length = 500)
 	private String placeAddress;
 
-	@Column(name = "place_phone")
+	@Column(name = "place_phone", length = 20)
 	private String placePhone;
 
-	@Column(name = "place_homepage")
+	@Column(name = "place_homepage", length = 1000)
 	private String placeHomepage;
 
-	@Column(name = "place_lat")
+	@Column(name = "place_lat", length=30)
 	private String placeLat;
 
-	@Column(name = "place_lon")
+	@Column(name = "place_lon", length = 30)
 	private String placeLon;
 
 	@Column(name = "place_inqury")

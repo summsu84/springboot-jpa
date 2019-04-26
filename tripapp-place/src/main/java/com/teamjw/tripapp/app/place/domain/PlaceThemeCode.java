@@ -28,13 +28,13 @@ import java.util.Set;
 public class PlaceThemeCode extends BaseDateEntity {
 
 	@Id
-	@Column(name = "theme_code")
+	@Column(name = "theme_code", length=8, unique=true, nullable = false)
 	@NotEmpty
 	private String themeCode;
 
-	@Column(name = "theme_korean_name")
+	@Column(name = "theme_korean_name", length=100)
 	private String themeKoreanName;
 
-	@Column(name = "theme_english_name")
+	@Column(name = "theme_english_name", length=100)
 	private String themeEnglishName;
 }
