@@ -27,23 +27,53 @@ public class PlaceCommentController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PlaceCommentController.class);
 
+    /**
+     *  모든 커멘트를 가져온다.
+     * @return
+     */
     @RequestMapping(value = "/place/comment", method = RequestMethod.GET)
     public List<PlaceComment> getPlaceCommets() {
         return placeCommentService.getPlaces();
     }
 
-    //
+    /**
+     *  커멘트 등록 한다.
+     * @param place
+     * @return
+     */
     @RequestMapping(value = "/place/comment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public PlaceComment createPlaceComment(@RequestBody PlaceComment place) {
         return placeCommentService.createPlaceComment(place);
     }
 
+
+    /**
+     *  Place Id를 기반으로 Place Comment를 등록 한다.
+     * @param placeId
+     * @param placeComment
+     * @return
+     */
+    @RequestMapping(value = "/place/{placeId}/comment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PlaceComment createPlaceCommetById(@PathVariable(value = "placeId") Long placeId, @RequestBody PlaceComment placeComment) {
+        return placeCommentService.createPlaceCommentById(placeId, placeComment);
+    }
+
+    /**
+     *  커멘트 Id에 따른 커멘트를 가져온다.
+     * @param commentId
+     * @return
+     */
     @RequestMapping(value = "/place/comment/{commentId}", method = RequestMethod.GET)
     public Optional<PlaceComment> getPlaceCommentById(@PathVariable(value = "commentId") Long commentId) {
         return placeCommentService.getPlaceCommentById(commentId);
     }
 
 
+    /**
+     *  커멘트 Id 에 따라 커멘트를 삭제 한다.
+     * @param commentId
+     * @return
+     */
     @RequestMapping(value = "/place/comment/{commentId}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deletePlaceCommentById(@PathVariable(value = "commentId") long commentId) {
         return placeCommentService.deletePlaceCommentById(commentId);

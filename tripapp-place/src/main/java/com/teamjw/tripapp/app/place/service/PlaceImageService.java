@@ -9,8 +9,10 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  *
@@ -28,7 +30,8 @@ public class PlaceImageService {
 
     @Autowired
     PlaceImageRepository placeImageRepository;
-
+    @Autowired
+    PlaceRepository placeRepository;
 
     /**
      *  장소 조회
@@ -78,5 +81,32 @@ public class PlaceImageService {
 
         return ResponseEntity.ok().build();
 
+    }
+
+    /**
+     *  Place ID를 기반으로 Place Image 정보를 저장한다.
+     * @param placeId
+     * @param placeImage
+     * @return
+     */
+    public PlaceImage createPlaceImage(Long placeId, PlaceImage placeImage) {
+        Set<PlaceImage> placeImages = new HashSet<>();
+        Place place1 = new Place();
+
+        Optional<Place> byId = placeRepository.findById(placeId);
+        if (!byId.isPresent()) {
+            throw new ResourceNotFoundException("placeId with id " + placeId + " does not exist");
+        }
+        Place place = byId.get();
+
+        //tie Author to Book
+        placeImage.setPlace(place);
+
+        PlaceImage placeImage1 = placeImageRepository.save(placeImage);
+        //tie Book to Author
+        placeImages.add(placeImage1);
+        //place1.set(books);
+
+        return placeImage1;
     }
 }

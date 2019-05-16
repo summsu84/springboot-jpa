@@ -55,10 +55,10 @@ public class BaseEntity implements Serializable {
     private String updateUserName;
 
     @Column(name = "use_yn", length = 1)
-    private String useYn;
+    private String useYn = "Y";
 
     @Column(name = "del_yn", length = 1)
-    private String delYn;
+    private String delYn = "N";
 
 
 

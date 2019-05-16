@@ -25,15 +25,25 @@ public class PlaceImageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PlaceImageController.class);
 
+
+    /**
+     *  모든 이미지 리스트를 가져온다.
+     * @return
+     */
     @RequestMapping(value = "/place/image", method = RequestMethod.GET)
     public List<PlaceImage> getPlaceImages() {
         return placeImageService.getPlaces();
     }
 
-    //
-    @RequestMapping(value = "/place/image", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PlaceImage createPlaceImage(@RequestBody PlaceImage place) {
-        return placeImageService.createPlaceImage(place);
+    /**
+     *  PlaceId에 해당하는 이미지를 등록 한다.
+     * @param placeId
+     * @param placeImage
+     * @return
+     */
+    @RequestMapping(value = "/place/{placeId}/image", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PlaceImage createPlaceImage(@PathVariable(value = "placeId") Long placeId, @RequestBody PlaceImage placeImage) {
+        return placeImageService.createPlaceImage(placeId, placeImage);
     }
 
     @RequestMapping(value = "/place/image/{imageId}", method = RequestMethod.GET)

@@ -15,8 +15,7 @@
  */
 package com.teamjw.tripapp.app.place.repository;
 
-import com.teamjw.tripapp.app.place.domain.Place;
-import com.teamjw.tripapp.app.place.domain.PlaceCode;
+import com.teamjw.tripapp.app.place.domain.PlaceCountryCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +23,6 @@ import org.springframework.stereotype.Repository;
  *  Place Repository
  */
 @Repository
-public interface PlaceCodeRepository extends JpaRepository<PlaceCode, Long> {
+public interface PlaceCountryCodeRepository extends JpaRepository<PlaceCountryCode, String> {
 
 }

@@ -2,8 +2,9 @@ package com.teamjw.tripapp.app.place.controller;
 
 
 import com.teamjw.tripapp.app.place.domain.Place;
-import com.teamjw.tripapp.app.place.repository.PlaceRepository;
+import com.teamjw.tripapp.app.place.domain.PlaceThemeCode;
 import com.teamjw.tripapp.app.place.service.PlaceService;
+import com.teamjw.tripapp.app.place.service.PlaceThemeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,66 +13,63 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class PlaceController {
+public class PlaceThemeCodeController {
 	@Value("#{environment['SERVICE_ENDPOINT'] ?: 'localhost:8080'}")
 	private String serviceEndpoint;
 
 
 	@Autowired
-    private PlaceService placeService;
+    private PlaceThemeService placeThemeService;
 
-	private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
-
-    /**
-     *  모든 장소를 가져온다.
-     * @return
-     */
-    @RequestMapping(value = "/place", method = RequestMethod.GET)
-    public List<Place> getPlaces() {
-        return placeService.getPlaces();
-    }
+	private static final Logger logger = LoggerFactory.getLogger(PlaceThemeCodeController.class);
 
     /**
-     *  장소를 등록 한다.
-     * @param place
+     *  모든 테마 코드를 가져온다.
      * @return
      */
-    @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Place createPlace(@RequestBody Place place) {
-        return placeService.createPlaceAll(place);
+    @RequestMapping(value = "/place/themecode", method = RequestMethod.GET)
+    public List<PlaceThemeCode> getPlaceThemeCodes() {
+        return placeThemeService.getPlaces();
     }
-
-    @RequestMapping(value = "/place/country/{countryId}/theme/{themeId}/type/{typeId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Place createPlaceByCountryAndThemeAndType(@RequestBody Place place, @PathVariable(value = "countryId") String countryId,
-        @PathVariable(value = "themeId") Long themeId, @PathVariable(value = "typeId") Long typeId ) {
-        return placeService.createPlaceByCountryAndThemeAndType(place, countryId, themeId, typeId);
-    }
-
-
 
     /**
-     *  장소 Id에 따른 장소 검색
-     * @param placeId
+     *  테마 코드를 등록 한다.
+     * @param placeThemeCode
      * @return
      */
-    @RequestMapping(value = "/place/{placeId}", method = RequestMethod.GET)
-    public Place getPlaceById(@PathVariable(value = "placeId") Long placeId) {
-        return (placeService.getPlaceById(placeId)).get();
+    @RequestMapping(value = "/place/themecode", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public PlaceThemeCode createPlaceThemeCode(@RequestBody PlaceThemeCode placeThemeCode) {
+        return placeThemeService.createPlaceThemeCode(placeThemeCode);
     }
+
+    /**
+     *  특정 ID의 테마코드를 가져온다.
+     * @param themeId
+     * @return
+     */
+    @RequestMapping(value = "/place/themecode/{id}", method = RequestMethod.GET)
+    public Optional<PlaceThemeCode> getPlaceThemeCodeById(@PathVariable(value = "id") Long themeId) {
+        return placeThemeService.getPlaceThemeCodeById(themeId);
+    }
+
 
 /*    @RequestMapping(value = "/place", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Place updatePlace(@PathVariable(value = "authorId") Long authorId, @RequestBody Author author) {
         return authorService.updateAuthorById(authorId, author);
     }*/
 
-    @RequestMapping(value = "/place/{placeId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deletePlaceById(@PathVariable(value = "placeId") long placeId) {
-        return placeService.deletePlaceById(placeId);
+    /**
+     *  특정 ID의 테마코드를 삭제 한다.
+     * @param themeId
+     * @return
+     */
+    @RequestMapping(value = "/place/themecode/{Id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deletePlaceById(@PathVariable(value = "Id") Long themeId) {
+        return placeThemeService.deletePlaceThemeById(themeId);
     }
 /*
 	@RequestMapping(value = "/place/{placeName}", method = RequestMethod.GET)

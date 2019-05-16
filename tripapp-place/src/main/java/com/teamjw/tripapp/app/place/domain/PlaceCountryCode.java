@@ -21,19 +21,24 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "trip_tbl_place_theme_code")
+@Table(name = "trip_tbl_place_country_code")
 @Getter
 @Setter
 @ToString
-public class PlaceThemeCode extends BaseEntity {
+public class PlaceCountryCode extends BaseDateEntity {
 
-	@Column(name = "theme_korean_name", length=100)
-	private String themeKoreanName;
+	@Id
+	@Column(name = "country_code", length=2, unique=true, nullable = false)
+	@NotEmpty
+	private String countryCode;
 
-	@Column(name = "theme_english_name", length=100)
-	private String themeEnglishName;
+	@Column(name = "country_korean_name", length=100)
+	private String countryKoreanName;
+
+	@Column(name = "country_english_name", length=100)
+	private String countryEnglishName;
 
 	// Place 1:N 관계
-/*	@OneToMany(mappedBy = "placeTheme", fetch = FetchType.LAZY)       // Ok
+/*	@OneToMany(mappedBy = "placeCountry", fetch = FetchType.LAZY)       // Ok
 	private Set<Place> places = new HashSet<>();*/
 }

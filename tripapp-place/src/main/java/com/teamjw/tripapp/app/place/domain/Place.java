@@ -31,11 +31,11 @@ public class Place extends BaseEntity {
 	@NotEmpty
 	private String placeCd;
 
-	@Column(name = "place_theme", length=8, unique=true, nullable = false)
-	private String placeTheme;
+/*	@Column(name = "place_theme", length=8, unique=true, nullable = false)
+	private String placeTheme;*/
 
-	@Column(name = "place_type", length=8, unique=true, nullable = false)
-	private String placeType;
+/*	@Column(name = "place_type", length=8, unique=true, nullable = false)
+	private String placeTypeCode;*/
 
 	@Column(name = "place_korean_name", length = 255, nullable = false)
 	@NotEmpty
@@ -71,6 +71,20 @@ public class Place extends BaseEntity {
 	@Column(name = "place_like")
 	private int placeLike;
 
+	@Column(name = "place_open_time", length = 50)
+	private String placeOpenTime;
+
+	@Column(name = "place_close_time", length = 50)
+	private String placeCloseTime;
+
+	@Column(name = "place_close_day", length = 50)
+	private String placeCloseDay;
+
+	@Column(name = "place_fee", length = 50)
+	private String placeFee;
+
+
+
 	// 이미지 1:N 관계
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
 	// mappedBy는 관계되는 엔티티의 필드명을 사용
@@ -81,4 +95,33 @@ public class Place extends BaseEntity {
 	@OneToMany(mappedBy = "place", fetch = FetchType.LAZY)       // Ok
 	private Set<PlaceComment> placeComments = new HashSet<>();
 
+	// 테마 코드 N : 1 관계
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="place_theme_id", nullable = false)
+	private PlaceThemeCode placeTheme;
+
+	// 타입 코드 N : 1 관계
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="place_type_id", nullable = false)
+	private PlaceTypeCode placeTypeCode;
+
+	// 지역 코드 N : 1 관계
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="place_country_id", nullable = false)
+	private PlaceCountryCode placeCountry;
+
+	public void addPlaceTheme(PlaceThemeCode placeThemeCode)
+	{
+		this.placeTheme = placeThemeCode;
+	}
+
+	public void addPlaceType(PlaceTypeCode placeTypeCode)
+	{
+		this.placeTypeCode = placeTypeCode;
+	}
+
+	public void addPlaceCountry(PlaceCountryCode placeCountryCode)
+	{
+		this.placeCountry = placeCountryCode;
+	}
 }

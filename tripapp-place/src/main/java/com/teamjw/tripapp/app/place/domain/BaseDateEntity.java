@@ -53,9 +53,9 @@ public class BaseDateEntity implements Serializable {
     private String updateUserName;
 
     @Column(name = "use_yn")
-    private String useYn;
+    private String useYn = "Y";
 
     @Column(name = "del_yn")
-    private String delYn;
+    private String delYn = "N";
 
 }

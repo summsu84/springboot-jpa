@@ -1,16 +1,17 @@
 package com.teamjw.tripapp.app.place.service;
 
 import com.teamjw.tripapp.app.place.domain.Place;
+import com.teamjw.tripapp.app.place.domain.PlaceCountryCode;
+import com.teamjw.tripapp.app.place.domain.PlaceThemeCode;
+import com.teamjw.tripapp.app.place.domain.PlaceTypeCode;
 import com.teamjw.tripapp.app.place.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  *
@@ -28,6 +29,18 @@ public class PlaceService {
 
     @Autowired
     PlaceRepository placeRepository;
+
+    @Autowired
+    PlaceCountryService placeCountryService;
+
+    @Autowired
+    PlaceThemeService placeThemeService;
+
+    @Autowired
+    PlaceTypeService placeTypeService;
+
+
+
 
 
     /**
@@ -78,5 +91,50 @@ public class PlaceService {
 
         return ResponseEntity.ok().build();
 
+    }
+
+    public Place createPlaceAll(Place place) {
+
+
+
+        // Country Code
+        Optional<PlaceCountryCode> byId = placeCountryService.getPlaceCountryCode("A1");
+        PlaceCountryCode placeCountryCode = byId.get();
+        // TehemeCode
+        Optional<PlaceThemeCode> byid1 = placeThemeService.getPlaceThemeCodeById((long) 1);
+        PlaceThemeCode placeThemeCode = byid1.get();
+        // Type Code
+        Optional<PlaceTypeCode> byid2 = placeTypeService.getPlaceTypeCodeById((long) 1);
+        PlaceTypeCode placeTypeCode = byid2.get();
+
+        place.addPlaceCountry(placeCountryCode);
+        place.addPlaceTheme(placeThemeCode);
+        place.addPlaceType(placeTypeCode);
+
+        Place place1 = placeRepository.save(place);
+
+
+        return place1;
+    }
+
+    public Place createPlaceByCountryAndThemeAndType(Place place, String countryId, Long themeId, Long typeId) {
+        // Country Code
+        Optional<PlaceCountryCode> byId = placeCountryService.getPlaceCountryCode(countryId);
+        PlaceCountryCode placeCountryCode = byId.get();
+        // TehemeCode
+        Optional<PlaceThemeCode> byid1 = placeThemeService.getPlaceThemeCodeById(themeId);
+        PlaceThemeCode placeThemeCode = byid1.get();
+        // Type Code
+        Optional<PlaceTypeCode> byid2 = placeTypeService.getPlaceTypeCodeById(typeId);
+        PlaceTypeCode placeTypeCode = byid2.get();
+
+        place.addPlaceCountry(placeCountryCode);
+        place.addPlaceTheme(placeThemeCode);
+        place.addPlaceType(placeTypeCode);
+
+        Place place1 = placeRepository.save(place);
+
+
+        return place1;
     }
 }
