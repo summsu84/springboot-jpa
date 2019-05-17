@@ -110,6 +110,11 @@ public class Place extends BaseEntity {
 	@JoinColumn(name="place_country_id", nullable = false)
 	private PlaceCountryCode placeCountry;
 
+
+
+	/*@OneToMany(mappedBy = "placeId")
+	Set<BestPlaceMapper> bestPlaceMappers;*/
+
 	public void addPlaceTheme(PlaceThemeCode placeThemeCode)
 	{
 		this.placeTheme = placeThemeCode;

@@ -43,6 +43,9 @@ public class PlaceComment extends BaseEntity {
 	@JoinColumn(name="place_id", nullable = false)
 	private Place place;
 
+	@Column(name = "user_id")
+	private Long userId;
+
 
 	public Long getUpperId() {
 		return upperId;
@@ -82,6 +85,14 @@ public class PlaceComment extends BaseEntity {
 
 	public void setBad(int bad) {
 		this.bad = bad;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	@JsonIgnore
