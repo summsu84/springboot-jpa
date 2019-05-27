@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +37,15 @@ public class PlaceController {
     @RequestMapping(value = "/place", method = RequestMethod.GET)
     public List<Place> getPlaces() {
         return placeService.getPlaces();
+    }
+
+    //page
+    @RequestMapping(value = "/place/page/{pgno}/{size}", method = RequestMethod.GET)
+    public Page<Place> getPlacesByPage(@PathVariable Integer pgno,
+                                       @PathVariable Integer size
+                                       ) {
+        PageRequest pageRequest = PageRequest.of(pgno - 1, size, Sort.Direction.DESC, "placeCd");    //new PageRequest is deprecated
+        return placeService.getPlaceByPage(pageRequest);
     }
 
     /**

@@ -11,11 +11,11 @@ import java.util.Set;
 
 /**
  * 
- * 여행지 테마 코드 엔티티 클래스
- * DESC : 여행지 테마 코드 모델
+ * 여행지 국가 코드 엔티티 클래스
+ * DESC : 여행지 국가 코드 코드 모델
  * DATE : 2019.04.17
  * 
- * 테마코드, 테마 이름, 사용여부, 삭제여부
+ * 3자리 국가코드, 국가 한글명, 국가 영문명, 비자 사용여부, 정렬 순서
  * 
  * @author teamjw - JJW
  */
@@ -28,7 +28,7 @@ import java.util.Set;
 public class PlaceCountryCode extends BaseDateEntity {
 
 	@Id
-	@Column(name = "country_code", length=2, unique=true, nullable = false)
+	@Column(name = "country_code", length=3, unique=true, nullable = false)
 	@NotEmpty
 	private String countryCode;
 
@@ -38,7 +38,18 @@ public class PlaceCountryCode extends BaseDateEntity {
 	@Column(name = "country_english_name", length=100)
 	private String countryEnglishName;
 
-	// Place 1:N 관계
-/*	@OneToMany(mappedBy = "placeCountry", fetch = FetchType.LAZY)       // Ok
-	private Set<Place> places = new HashSet<>();*/
+	@Column(name = "sort_order")
+	private int sortOrder;
+
+	@Column(name = "visa_use_yn", length = 1)
+	private String visaUseYn;
+
+	// 각 베스트 정보와 맵핑 하고자 하는 장소 정보 (이때, 각 장소는 여러개의 베스트 테이블과 연결되고, 베스트 테이블은 한개의 장소와 연결 된다)
+/*	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="city_id", nullable = false)
+	private PlaceCityCode cityId;*/
+
+	// CityCode와 1:N 관계
+	@OneToMany(mappedBy = "placeCountryCode", fetch = FetchType.LAZY)       // Ok
+	private Set<PlaceCityCode> placeCityCodes = new HashSet<>();
 }

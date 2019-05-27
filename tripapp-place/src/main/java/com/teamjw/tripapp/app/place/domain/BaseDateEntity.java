@@ -40,6 +40,8 @@ import java.time.LocalDateTime;
 @Setter
 public class BaseDateEntity implements Serializable {
 
+
+    @Column(name= "created_time", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdTime;
 

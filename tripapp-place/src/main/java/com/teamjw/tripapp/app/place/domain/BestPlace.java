@@ -47,6 +47,11 @@ public class BestPlace extends BaseEntity {
 	@NotEmpty
 	private int seq;
 
+	@Column(name = "sort_order", nullable = false)
+	@NotEmpty
+	private int sortOrder;
+
+
 	// 각 베스트 정보와 맵핑 하고자 하는 장소 정보 (이때, 각 장소는 여러개의 베스트 테이블과 연결되고, 베스트 테이블은 한개의 장소와 연결 된다)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="place_id", nullable = false)

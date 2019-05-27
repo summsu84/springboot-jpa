@@ -106,9 +106,13 @@ public class Place extends BaseEntity {
 	private PlaceTypeCode placeTypeCode;
 
 	// 지역 코드 N : 1 관계
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="place_country_id", nullable = false)
-	private PlaceCountryCode placeCountry;
+	private PlaceCountryCode placeCountry;*/
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="place_city_code", nullable = false)
+	private PlaceCityCode placeCityCode;
 
 
 
@@ -125,8 +129,13 @@ public class Place extends BaseEntity {
 		this.placeTypeCode = placeTypeCode;
 	}
 
-	public void addPlaceCountry(PlaceCountryCode placeCountryCode)
+	/*public void addPlaceCountry(PlaceCountryCode placeCountryCode)
 	{
 		this.placeCountry = placeCountryCode;
+	}*/
+
+	public void addPlaceCityCode(PlaceCityCode placeCityCode)
+	{
+		this.placeCityCode = placeCityCode;
 	}
 }

@@ -1,11 +1,10 @@
 package com.teamjw.tripapp.app.place.service;
 
-import com.teamjw.tripapp.app.place.domain.Place;
-import com.teamjw.tripapp.app.place.domain.PlaceCountryCode;
-import com.teamjw.tripapp.app.place.domain.PlaceThemeCode;
-import com.teamjw.tripapp.app.place.domain.PlaceTypeCode;
+import com.teamjw.tripapp.app.place.domain.*;
 import com.teamjw.tripapp.app.place.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,8 @@ public class PlaceService {
     @Autowired
     PlaceTypeService placeTypeService;
 
-
+    @Autowired
+    PlaceCityCodeService placeCityCodeService;
 
 
 
@@ -57,6 +57,12 @@ public class PlaceService {
             throw new ResourceNotFoundException("Place with id " + placeId + " not found");
         }
         return placeRepository.findById(placeId);
+    }
+
+    //
+    public Page<Place> getPlaceByPage(Pageable page){
+
+        return placeRepository.findAll(page);
     }
 
 
@@ -97,9 +103,9 @@ public class PlaceService {
 
 
 
-        // Country Code
-        Optional<PlaceCountryCode> byId = placeCountryService.getPlaceCountryCode("A1");
-        PlaceCountryCode placeCountryCode = byId.get();
+        // Country City Code
+        Optional<PlaceCityCode> byId = placeCityCodeService.getPlacCityCodeByCode("11");
+        PlaceCityCode placeCityCode = byId.get();
         // TehemeCode
         Optional<PlaceThemeCode> byid1 = placeThemeService.getPlaceThemeCodeById((long) 1);
         PlaceThemeCode placeThemeCode = byid1.get();
@@ -107,7 +113,7 @@ public class PlaceService {
         Optional<PlaceTypeCode> byid2 = placeTypeService.getPlaceTypeCodeById((long) 1);
         PlaceTypeCode placeTypeCode = byid2.get();
 
-        place.addPlaceCountry(placeCountryCode);
+        place.addPlaceCityCode(placeCityCode);
         place.addPlaceTheme(placeThemeCode);
         place.addPlaceType(placeTypeCode);
 
@@ -128,7 +134,7 @@ public class PlaceService {
         Optional<PlaceTypeCode> byid2 = placeTypeService.getPlaceTypeCodeById(typeId);
         PlaceTypeCode placeTypeCode = byid2.get();
 
-        place.addPlaceCountry(placeCountryCode);
+        //place.addPlaceCountry(placeCountryCode);
         place.addPlaceTheme(placeThemeCode);
         place.addPlaceType(placeTypeCode);
 

@@ -15,18 +15,15 @@
  */
 package com.teamjw.tripapp.app.place.repository;
 
-import com.teamjw.tripapp.app.place.domain.Place;
-import com.teamjw.tripapp.app.place.domain.PlaceComment;
+import com.teamjw.tripapp.app.place.domain.PlaceCityCode;
+import com.teamjw.tripapp.app.place.domain.PlaceCountryCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
- *  Place Repository
+ *  Place City Code Repository
  */
 @Repository
-public interface PlaceCommentRepository extends JpaRepository<PlaceComment, Long> {
+public interface PlaceCityCodeRepository extends JpaRepository<PlaceCityCode, String> {
 
-    List<PlaceComment> findByUserId(Long userId);
 }

@@ -103,4 +103,9 @@ public class PlaceCommentService {
 
         return placeComment1;
     }
+
+    //사용자의 아이디에 따라서 커멘트를 가져온다.
+    public List<PlaceComment> getPlaceCommentByUserId(Long userId) {
+        return placeCommentRepository.findByUserId(userId);
+    }
 }

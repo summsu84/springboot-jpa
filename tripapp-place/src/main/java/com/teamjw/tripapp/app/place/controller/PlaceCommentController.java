@@ -68,6 +68,14 @@ public class PlaceCommentController {
         return placeCommentService.getPlaceCommentById(commentId);
     }
 
+    // userId에 따라서 커멘트를 가져온다.
+    @RequestMapping(value = "/place/user/{userId}/comment", method = RequestMethod.GET)
+    public List<PlaceComment> getPlaceCommentByUserId(@PathVariable(value = "userId") Long userId) {
+        return placeCommentService.getPlaceCommentByUserId(userId);
+    }
+
+
+
 
     /**
      *  커멘트 Id 에 따라 커멘트를 삭제 한다.
